@@ -30,4 +30,5 @@ public class Article {
     public String getLibelle() {
         return libelle;
     }
+    // test
 }
