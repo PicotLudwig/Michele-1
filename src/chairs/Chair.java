@@ -7,8 +7,7 @@ public class Chair {
     int example = 1;
     protected String proprietaire;
 
-    public Chair(String material, String color, double cost) {
-        int example = 1;
+    public Chair(String material, String color, double cost) {int example = 1;
         this.material = material;
         this.color = color;
         this.cost = cost;
@@ -17,6 +16,10 @@ public class Chair {
     public double getCostOfChair() {
         int example = 1;
         return cost;
+    }
+
+    public String getMaterial() {
+        return material;
     }
 }
 
