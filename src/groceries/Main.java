@@ -5,6 +5,12 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
+        int n = 7;
+        for (int i = 1; i < 9; i++) {
+                System.out.println(n*i);
+            }
+
+
         Store store1 = new Store("Maxi");
         Store store2 = new Store("Provigo");
         for (Store individualStores : Store.listOfStores) {
@@ -27,12 +33,20 @@ public class Main {
         }
 
         Customer customer1 = new Customer("Ludwig");
-        customer1.buyProducts(cheese1, store1, 1);
+        customer1.buyProducts(cheese1, store1, 2);
+        System.out.println("changes below");
+        for (Products individualProducts : store1.listOfProducts) {
+            System.out.println(individualProducts.name + " " + individualProducts.reference + " " + individualProducts.price  + " " + individualProducts.quantity);
+        }
+
+        store1.returnItem(customer1, cheese1, 1);
+
         System.out.println("changes below");
         for (Products individualProducts : store1.listOfProducts) {
             System.out.println(individualProducts.name + " " + individualProducts.reference + " " + individualProducts.price  + " " + individualProducts.quantity);
         }
     }
+
 
 
 }

@@ -1,20 +1,21 @@
 package books;
 
-public class PaperBooks extends Books implements Paper{
-    public PaperBooks (String title, double price, String author, int numberOfPages) {
-        this.title = title;
-        this.price = price;
-        this.author = author;
-        this.numberOfPages = numberOfPages;
+public class PaperBooks extends Books {
+
+    public PaperBooks(String title, String author, boolean availability, int numberOfCopies, int numberOfCopiesAvailable) {
+        super(title, author, availability, numberOfCopies, numberOfCopiesAvailable);
     }
 
-    @Override
-    public void damaged() {
-
+    public PaperBooks (double price) {
+        super(price);
     }
 
-    @Override
-    public void burn() {
-        System.out.println("burning");
+    public boolean checkAvailability(int quantity) {
+        if (numberOfCopiesAvailable > 0
+                && quantity <= numberOfCopiesAvailable) {
+            return true;
+        }
+        return false;
     }
 }
+

@@ -7,7 +7,7 @@ public class Store {
 
     public String mainName;
     public ArrayList<Products> listOfProducts = new ArrayList<>();
-
+    double bankAccountOfStore;
 
     public Store(String mainName) {
         this.mainName = mainName;
@@ -25,14 +25,22 @@ public class Store {
         return false;
     }
 
-    public void addItemToStoreList(Products products) {
-        for (Products productsOfStore : this.listOfProducts) {
-            if (productsOfStore.name == products.name) {
-                productsOfStore.quantity += products.quantity;
-            } else {
-                this.listOfProducts.add(products);
-            }
+    public void addItemToStoreList(Products products, Integer quantity) {
+        if (quantity == null) {
+            for (Products productsOfStore : this.listOfProducts) {
+                if (productsOfStore.name == products.name) {
+                    productsOfStore.quantity += products.quantity;
+                } else {
+                    this.listOfProducts.add(products);
+                }
 
+            }
+        } else {
+            for (Products productsOfStore : this.listOfProducts) {
+                if (productsOfStore.name == products.name) {
+                    productsOfStore.quantity += quantity;
+                }
+            }
         }
     }
 
@@ -47,8 +55,24 @@ public class Store {
         return false;
     }
 
-    public void addStore (Store store) {
-            listOfStores.add(store);
+    public void addStore(Store store) {
+        listOfStores.add(store);
     }
 
+    public double depositIntoStoreBankAccount(Customer customer) {
+        this.bankAccountOfStore += customer.customersBill();
+        customer.listOfProductsWhichHaveBeenPaidOfCustomer = customer.listOfProductsToBePaidOfCustomer;
+        customer.listOfProductsToBePaidOfCustomer.clear();
+        return bankAccountOfStore;
+    }
+
+    public double returnItem(Customer customer, Products products, int quantity) {
+        bankAccountOfStore -= products.price * quantity * 1.15;
+
+        boolean scamming = customer.modifyingCustomerListOfProducts(products, quantity);
+        if (scamming) {
+            addItemToStoreList(products, quantity);
+        }
+        return bankAccountOfStore;
+    }
 }
